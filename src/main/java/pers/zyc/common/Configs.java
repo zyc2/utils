@@ -10,20 +10,24 @@ import java.util.concurrent.locks.ReentrantLock;
  * @date 2018/11/29 10:37
  */
 public class Configs {
+    private Configs() {
+        throw new IllegalStateException("Utility class");
+    }
+
     private static Properties properties = new Properties();
     private static Lock lock = new ReentrantLock();
     private static long lastTime = 0;
-    private static final long step = 10 * 60 * 1000;
-    private static final String resourceName = "config.properties";
+    private static final long STEP = 10 * 60 * 1000L;
+    private static final String RESOURCE_NAME = "config.properties";
 
     private static void loadProperties() {
         long currentTimeMillis = System.currentTimeMillis();
-        if (currentTimeMillis - lastTime < step) return;
+        if (currentTimeMillis - lastTime < STEP) return;
         try {
             lock.lock();
-            if (currentTimeMillis - lastTime < step) return;
+            if (currentTimeMillis - lastTime < STEP) return;
             lastTime = currentTimeMillis;
-            properties.load(Configs.class.getResourceAsStream(resourceName));
+            properties.load(Configs.class.getResourceAsStream(RESOURCE_NAME));
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
