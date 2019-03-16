@@ -23,15 +23,15 @@ public class TopLinkTest {
         System.out.println("\n" + topRankValue);
         TopLink<Integer> topLink = TopLink.topRankLink(list, 10);
         while (topLink != null) {
-            System.out.print(topLink.value + ",");
-            topLink = topLink.next;
+            System.out.print(topLink.getValue() + ",");
+            topLink = topLink.getNext();
         }
         Integer bottomRankValue = TopLink.bottomRankValue(list, 3);
         System.out.println("\n" + bottomRankValue);
         TopLink<Integer> bottomLink = TopLink.bottomRankLink(list, 10);
         while (bottomLink != null) {
-            System.out.print(bottomLink.value + ",");
-            bottomLink = bottomLink.next;
+            System.out.print(bottomLink.getValue() + ",");
+            bottomLink = bottomLink.getNext();
         }
     }
 }

@@ -1,5 +1,7 @@
 package pers.zyc.common;
 
+import lombok.Getter;
+
 import java.util.Collection;
 import java.util.Iterator;
 
@@ -7,16 +9,17 @@ import java.util.Iterator;
  * @author YanchaoZhang
  * @date 2018/8/16 12:52
  */
+@Getter
 public class TopLink<C extends Comparable<? super C>> {
-    public C value;
-    public TopLink<C> next;
+    private C value;
+    private TopLink<C> next;
 
     private TopLink(C value) {
         this.value = value;
     }
 
     private static <T extends Comparable<? super T>> TopLink<T> getRankLink(Collection<T> collection, int rank, boolean invert) {
-        if (rank < 1 || collection == null || collection.size() == 0 || rank > collection.size()) {
+        if (rank < 1 || collection == null || collection.isEmpty() || rank > collection.size()) {
             throw new IllegalArgumentException("集合为空或rank值不合理");
         }
         int count = 1;

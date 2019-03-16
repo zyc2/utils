@@ -1,5 +1,7 @@
 package pers.zyc.common;
 
+import java.util.Collection;
+
 /**
  * string工具类
  *
@@ -7,6 +9,25 @@ package pers.zyc.common;
  * @date 2018/11/5 18:32
  */
 public class Strings {
+    private Strings() {
+        throw new IllegalStateException("Utility class");
+    }
+
+    public String maskString(String original, Collection<String> keyWords, char sign) {
+        StringBuilder sb = new StringBuilder(original);
+        for (String line : keyWords) {
+            for (int indexOf = 0; (indexOf = original.indexOf(line, indexOf)) > -1; ) {
+                for (int end = indexOf + line.length(); indexOf < end; indexOf++) {
+                    sb.setCharAt(indexOf, sign);
+                }
+            }
+        }
+        return sb.toString();
+    }
+
+    public String maskString(String original, Collection<String> keyWords) {
+        return maskString(original, keyWords, '*');
+    }
 
     /**
      * 字符串长度检校,有null直接返回false
