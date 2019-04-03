@@ -7,9 +7,9 @@ import java.util.UUID;
  * @author YanchaoZhang
  * @date 2018/8/1 17:09
  */
-public class Randoms {
+public class NumberUtils {
 
-    private Randoms() {
+    private NumberUtils() {
         throw new IllegalStateException("Utility class");
     }
 
@@ -21,6 +21,14 @@ public class Randoms {
             , 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
             , 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
     };
+
+    public static String bytesToHex(byte[] bytes) {
+        StringBuilder sb = new StringBuilder();
+        for (byte b : bytes) {
+            sb.append(hex[(b >> 4) & 0xf]).append(hex[b & 0xf]);
+        }
+        return sb.toString();
+    }
 
 
     public static String getUUID32() {

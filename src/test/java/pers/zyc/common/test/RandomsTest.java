@@ -1,6 +1,6 @@
 package pers.zyc.common.test;
 
-import pers.zyc.common.Randoms;
+import pers.zyc.common.NumberUtils;
 
 /**
  * @author YanchaoZhang
@@ -10,10 +10,10 @@ public class RandomsTest {
     public static void main(String[] args) {
         long start = System.currentTimeMillis();
         for (int i = 0; i < 10000; i++) {
-            String uuid32 = Randoms.getUUID32();
-            String uuid24 = Randoms.getUUID24();
-            String randomHex = Randoms.getRandomHex(32);
-            String randomAlphanumeric = Randoms.getRandomAlphanumeric(32);
+            String uuid32 = NumberUtils.getUUID32();
+            String uuid24 = NumberUtils.getUUID24();
+            String randomHex = NumberUtils.getRandomHex(32);
+            String randomAlphanumeric = NumberUtils.getRandomAlphanumeric(32);
 //            System.out.println(uuid32);
 //            System.out.println(uuid24);
 //            System.out.println(randomHex);

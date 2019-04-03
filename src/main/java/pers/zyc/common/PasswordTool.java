@@ -18,7 +18,7 @@ public class PasswordTool {
     }
 
     public String encode(String rawPassword) {
-        String randomHex = Randoms.getRandomHex(saltLength);
+        String randomHex = NumberUtils.getRandomHex(saltLength);
         String md5Hex = DigestUtils.md5Hex(randomHex + rawPassword);
         return randomHex + md5Hex;
     }
