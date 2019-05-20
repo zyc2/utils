@@ -1,6 +1,7 @@
 package pers.zyc.common;
 
 import java.util.Collection;
+import java.util.stream.Stream;
 
 /**
  * string工具类
@@ -12,6 +13,8 @@ public class Strings {
     private Strings() {
         throw new IllegalStateException("Utility class");
     }
+
+    public static String EMPTY = "";
 
     public String maskString(String original, Collection<String> keyWords, char sign) {
         StringBuilder sb = new StringBuilder(original);
@@ -27,6 +30,11 @@ public class Strings {
 
     public String maskString(String original, Collection<String> keyWords) {
         return maskString(original, keyWords, '*');
+    }
+
+    public static String[] splitByCommaNoneBlankInTheMiddle(String s) {
+        if (s == null) return Stream.of(EMPTY).toArray(String[]::new);
+        return s.replaceAll("^[,|，]+|(?<=[,|，])[,|，]+", "").split("[,|，]");
     }
 
     /**
