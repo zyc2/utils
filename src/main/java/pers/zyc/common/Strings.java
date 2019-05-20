@@ -1,7 +1,6 @@
 package pers.zyc.common;
 
 import java.util.Collection;
-import java.util.stream.Stream;
 
 /**
  * string工具类
@@ -33,7 +32,7 @@ public class Strings {
     }
 
     public static String[] splitByCommaNoneBlankInTheMiddle(String s) {
-        if (s == null) return Stream.of(EMPTY).toArray(String[]::new);
+        if (s == null) return new String[]{EMPTY};
         return s.replaceAll("^[,|，]+|(?<=[,|，])[,|，]+", "").split("[,|，]");
     }
 

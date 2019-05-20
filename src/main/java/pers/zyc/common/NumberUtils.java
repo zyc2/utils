@@ -85,4 +85,97 @@ public class NumberUtils {
     }
 
 
+    /**
+     * 例：105000<br>
+     * 十万五千
+     *
+     * @param org 原始数字
+     * @return 中文计数法
+     */
+    public static String convertToChineseInteger(int org) {
+        return convert(org, NUMS, true, false);
+    }
+    /**
+     * 例：101000<br>
+     * 十万零五千
+     *
+     * @param org 原始数字
+     * @return 中文计数法
+     */
+    public static String convertToChineseIntegerAdd0(int org) {
+        return convert(org, NUMS, true, true);
+    }
+    /**
+     * 例：101000<br>
+     * 壹拾万伍仟
+     *
+     * @param org 原始数字
+     * @return 中文计数法
+     */
+    public static String convertToChineseIntegerPlus(int org) {
+        return convert(org, PLUS, false, false);
+    }
+    /**
+     * 例：101000<br>
+     * 壹拾万零伍仟
+     *
+     * @param org 原始数字
+     * @return 中文计数法
+     */
+    public static String convertToChineseIntegerPlusAdd0(int org) {
+        return convert(org, PLUS, false, true);
+    }
+
+
+    private static final char[] NUMS = {'零', '一', '二', '三', '四', '五', '六', '七', '八', '九', '十', '百', '千', '万', '亿'};
+    private static final char[] PLUS = {'零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖', '拾', '佰', '仟', '万', '亿'};
+
+    /**
+     * 转换数字到中文计数法
+     * @param org 原始数字
+     * @param delete1 是否删除一十开头的一
+     * @param add0 亿万位为零是否提示
+     * @return 中文计数法
+     */
+    private static String convert(int org, char[] arr, boolean delete1, boolean add0) {
+        if (org == 0) return "零";
+        StringBuilder sb = new StringBuilder();
+        int revert = org < 0 ? -1 : 1;
+        int i = 0;
+        int last = 0;
+        int cursor = -1;
+        do {
+            int first = i % 4;
+            int num = org % 10 * revert;
+            boolean step4 = i == 4 || i == 8;
+            if (step4) {
+                if (cursor == sb.length()) {
+                    sb.deleteCharAt(cursor - 1);
+                }
+                if (add0 && num == 0 && last != 0) {
+                    sb.append(arr[0]);
+                }
+                sb.append(arr[12 + i / 4]);
+                cursor = sb.length();
+            }
+            if (num != 0 && first > 0) {
+                sb.append(arr[9 + first]);
+            }
+            if (num != 0 || (last != 0 && !step4)) {
+                sb.append(arr[num]);
+            }
+            last = num;
+            i++;
+        } while ((org /= 10) != 0);
+        last = sb.length() - 1;
+        if (delete1 && last > 1 && sb.charAt(last) == arr[1] && sb.charAt(last - 1) == arr[10]) {
+            sb.deleteCharAt(last);
+        }
+        if (revert == -1) {
+            sb.append('负');
+        }
+        return sb.reverse().toString();
+    }
+
+
 }
