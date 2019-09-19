@@ -1,5 +1,8 @@
 package pers.zyc.common.collection;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.stream.Stream;
@@ -8,6 +11,7 @@ import java.util.stream.Stream;
  * @author zyc
  * Date:9/19/2019 13:43
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class CollectionTools {
 
     @SafeVarargs
