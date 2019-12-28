@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Objects;
 import java.util.stream.Stream;
 
 /**
@@ -28,4 +29,8 @@ public class CollectionTools {
         return collection.stream();
     }
 
+    @SafeVarargs
+    public static <E> Stream<E> streamNonNull(Collection<E> collection, E... extra) {
+        return stream(collection, extra).filter(Objects::nonNull);
+    }
 }

@@ -65,7 +65,7 @@ public class Strings {
     public static String truncate(String s, int max) {
         if (s == null) return "";
         int len = s.length();
-        return s.substring(0, len > max ? max : len);
+        return s.substring(0, Math.min(len, max));
     }
 
     /**
